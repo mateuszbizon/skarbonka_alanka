@@ -1,0 +1,39 @@
+@use "../abstract/colors" as *;
+@use "../abstract/mixins" as *;
+
+.nav {
+    height: 70px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &__btn-circle {
+        @include button;
+        border-radius: 50%;
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    &__btn {
+        display: none;
+        @include button;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 992px) {
+    .nav {
+        padding: 10px 25px;
+
+        &__btn-circle {
+            display: none;
+        }
+
+        &__btn {
+            display: block;
+        }
+    }
+}

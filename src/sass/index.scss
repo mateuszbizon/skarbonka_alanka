@@ -1,0 +1,15 @@
+@use "./abstract/colors" as *;
+@use "./pages";
+@use "./components";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $main-color;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+}

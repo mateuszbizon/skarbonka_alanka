@@ -1,0 +1,12 @@
+@use "./colors" as *;
+
+@mixin button {
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background-color: $secondary-color;
+
+    &:hover {
+        background-color: $secondary-color-hover;
+    }
+}
