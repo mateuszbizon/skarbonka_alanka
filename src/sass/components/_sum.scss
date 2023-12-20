@@ -1,0 +1,62 @@
+@use "../abstract/colors" as *;
+@use "../abstract/mixins" as *;
+
+.sum {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    margin-top: 50px;
+
+    &__item {
+        width: 250px;
+        height: max-content;
+        border-radius: 8px;
+        background-color: $item-color;
+        color: #000;
+        padding: 10px;
+    }
+
+    &__item-name {
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    &__item-amount {
+        text-align: center;
+        font-size: 22px;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    &__item-btns-row {
+        width: 100%;
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    &__item-btn {
+        @include button-normal;
+    }
+}
+
+@media (min-width: 576px) {
+    .sum {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media (min-width: 768px) {
+    .sum {
+        &__item-name, &__item-amount {
+            font-size: 30px;
+        }
+    }
+}

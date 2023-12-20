@@ -1,8 +1,18 @@
 .main {
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
 }
+.main__amount {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 22px;
+}
 
+@media (min-width: 768px) {
+  .main__amount {
+    font-size: 30px;
+  }
+}
 .nav {
   height: 70px;
   padding: 10px 15px;
@@ -55,7 +65,7 @@
   margin-top: 10px;
 }
 .header__title {
-  font-size: 25px;
+  font-size: 30px;
   text-align: center;
 }
 .header__btns-row {
@@ -90,6 +100,87 @@
   }
   .header__btn {
     font-size: 18px;
+  }
+}
+.sum {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 25px;
+  margin-top: 50px;
+}
+.sum__item {
+  width: 250px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  border-radius: 8px;
+  background-color: #BFD7EA;
+  color: #000;
+  padding: 10px;
+}
+.sum__item-name {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+.sum__item-amount {
+  text-align: center;
+  font-size: 22px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+.sum__item-btns-row {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 5px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 20px;
+}
+.sum__item-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: #087E8B;
+}
+.sum__item-btn:hover {
+  background-color: #0a99a9;
+}
+
+@media (min-width: 576px) {
+  .sum {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+@media (min-width: 768px) {
+  .sum__item-name, .sum__item-amount {
+    font-size: 30px;
   }
 }
 * {
