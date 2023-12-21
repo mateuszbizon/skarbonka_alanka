@@ -1,11 +1,11 @@
 interface Form {
-	username: string;
+	email: string;
 	password: string;
 }
 
 interface Errors {
-    username: boolean,
-    usernameMessage: string,
+    email: boolean,
+    emailMessage: string,
     password: boolean,
     passwordMessage: string
 }
@@ -13,9 +13,9 @@ interface Errors {
 export default function loginValidation(formValues: Form) {
     const errors: Partial<Errors> = {}
 
-    if (!formValues.username.length) {
-        errors.username = true;
-        errors.usernameMessage = "Pole wymagane"
+    if (!formValues.email.length) {
+        errors.email = true;
+        errors.emailMessage = "Pole wymagane"
     }
 
     if (!formValues.password.length) {

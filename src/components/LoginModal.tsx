@@ -2,15 +2,16 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import Shadow from "./Shadow";
 import TextField from "@mui/material/TextField";
 import loginValidation from "../validations/loginValidation";
+import { loginWithEmailAndPassword } from "../services/auth";
 
 interface Form {
-	username: string;
+	email: string;
 	password: string;
 }
 
 interface Errors {
-    username: boolean,
-    usernameMessage: string,
+    email: boolean,
+    emailMessage: string,
     password: boolean,
     passwordMessage: string
 }
@@ -21,7 +22,7 @@ interface LoginModalProps {
 }
 
 function LoginModal({ loginModalActive, setLoginModalActive }: LoginModalProps) {
-	const [form, setForm] = useState<Form>({ username: "", password: "" });
+	const [form, setForm] = useState<Form>({ email: "", password: "" });
     const [errors, setErrors] = useState<Partial<Errors>>({})
 
 	function handleChangeInput(e: ChangeEvent<HTMLInputElement>) {
@@ -34,10 +35,19 @@ function LoginModal({ loginModalActive, setLoginModalActive }: LoginModalProps) 
         setErrors(loginValidation(form));
     }
 
+    function handleLoginWithEmailAndPassword() {
+        loginWithEmailAndPassword(form.email, form.password)
+            .then(() => {
+                setLoginModalActive(false)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     useEffect(() => {
-        if (Object.keys(errors).length === 0 && form.username.length > 0 && form.password.length > 0) {
-            console.log('wyslano')
-            setLoginModalActive(false)
+        if (Object.keys(errors).length === 0 && form.email.length > 0 && form.password.length > 0) {
+            handleLoginWithEmailAndPassword();
         }
     }, [errors])
 
@@ -50,12 +60,12 @@ function LoginModal({ loginModalActive, setLoginModalActive }: LoginModalProps) 
                     <div className='login-modal__box'>
                         <TextField
                             type='text'
-                            name='username'
-                            label='Nazwa użytkownika'
-                            error={errors.username}
-                            value={form.username}
+                            name='email'
+                            label='Adres email'
+                            error={errors.email}
+                            value={form.email}
                             onChange={handleChangeInput}
-                            helperText={errors.username && errors.usernameMessage}
+                            helperText={errors.email && errors.emailMessage}
                             fullWidth
                         />
                     </div>
