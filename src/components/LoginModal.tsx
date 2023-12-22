@@ -3,6 +3,8 @@ import Shadow from "./Shadow";
 import TextField from "@mui/material/TextField";
 import loginValidation from "../validations/loginValidation";
 import { loginWithEmailAndPassword } from "../services/auth";
+import { useNotification } from "../context/NotificationContext";
+import * as messages from "../constants/messages";
 
 interface Form {
 	email: string;
@@ -24,6 +26,7 @@ interface LoginModalProps {
 function LoginModal({ loginModalActive, setLoginModalActive }: LoginModalProps) {
 	const [form, setForm] = useState<Form>({ email: "", password: "" });
     const [errors, setErrors] = useState<Partial<Errors>>({})
+    const { showErrorNotification } = useNotification()
 
 	function handleChangeInput(e: ChangeEvent<HTMLInputElement>) {
 		const { name, value } = e.target;
@@ -41,7 +44,12 @@ function LoginModal({ loginModalActive, setLoginModalActive }: LoginModalProps) 
                 setLoginModalActive(false)
             })
             .catch(error => {
-                console.log(error)
+                if (error.code === 'auth/invalid-credential') {
+                    showErrorNotification(messages.loginCredentialsIncorrect)
+                    return;
+                }
+
+                showErrorNotification(messages.loginFail)
             })
     }
 

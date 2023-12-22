@@ -6,11 +6,14 @@ import LoginModal from '../components/LoginModal';
 import Container from '@mui/material/Container';
 import * as mainViews from "../constants/mainViewStrings";
 import { getAllPeople } from '../services/getData';
+import { useNotification } from '../context/NotificationContext';
+import * as messages from "../constants/messages";
 
 function Main() {
   const [mainView, setMainView] = useState<string>(mainViews.sumView);
   const [loginModalActive, setLoginModalActive] = useState<boolean>(false);
   const [peopleList, setPeopleList] = useState<any[]>([])
+  const { showErrorNotification } = useNotification();
 
   function handleGetAllPeople() {
     getAllPeople()
@@ -20,7 +23,7 @@ function Main() {
         setPeopleList(filteredData)
       })
       .catch(error => {
-        console.log(error)
+        showErrorNotification(messages.getAllPeopleFail)
       })
   }
 
