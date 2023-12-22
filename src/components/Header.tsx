@@ -16,7 +16,6 @@ function Header({ setMainView }: HeaderProps) {
         <div className="header__btns-row">
             <button className='header__btn' onClick={() => handleSetMainView(mainViews.sumView)}>Suma</button>
             <button className='header__btn' onClick={() => handleSetMainView(mainViews.debtView)}>Długi</button>
-            <button className='header__btn' onClick={() => handleSetMainView(mainViews.historyView)}>Historia</button>
         </div>
     </header>
   )
