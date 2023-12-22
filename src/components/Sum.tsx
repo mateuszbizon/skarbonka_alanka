@@ -18,8 +18,12 @@ function Sum({ peopleList }: SumProps) {
                     <div className="sum__item-btns-row">
                         <button className='sum__item-btn'>+2</button>
                         <button className='sum__item-btn'>+5</button>
-                        <button className='sum__item-btn'>-2</button>
-                        <button className='sum__item-btn'>-5</button>
+                        {person.amount >= 2 && (
+                            <button className='sum__item-btn'>-2</button>                          
+                        )}
+                        {person.amount >= 5 && (
+                            <button className='sum__item-btn'>-5</button>  
+                        )}
                     </div>
                 )}
             </div>
