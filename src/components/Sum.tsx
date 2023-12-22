@@ -1,42 +1,29 @@
 import React from 'react'
+import { useAuth } from '../context/AuthContext'
 
-function Sum() {
+interface SumProps {
+    peopleList: any[]
+}
+
+function Sum({ peopleList }: SumProps) {
+    const { user } = useAuth();
+
   return (
     <div className='sum'>
-        <div className="sum__item">
-            <p className='sum__item-name'>Mama</p>
-            <p className='sum__item-amount'>50 zł</p>
-            <div className="sum__item-btns-row">
-                <button className='sum__item-btn'>+2</button>
-                <button className='sum__item-btn'>+5</button>
-                <button className='sum__item-btn'>-2</button>
-                <button className='sum__item-btn'>-5</button>
+        {peopleList.map((person, index) => (
+            <div key={index} className="sum__item">
+                <p className='sum__item-name'>{person.name}</p>
+                <p className='sum__item-amount'>{person.amount} zł</p>
+                {user && (
+                    <div className="sum__item-btns-row">
+                        <button className='sum__item-btn'>+2</button>
+                        <button className='sum__item-btn'>+5</button>
+                        <button className='sum__item-btn'>-2</button>
+                        <button className='sum__item-btn'>-5</button>
+                    </div>
+                )}
             </div>
-        </div>
-        <div className="sum__item">
-            <p className='sum__item-name'>Babcia</p>
-            <p className='sum__item-amount'>50 zł</p>
-            <div className="sum__item-btns-row">
-                <button className='sum__item-btn'>+2</button>
-                <button className='sum__item-btn'>+5</button>
-            </div>
-        </div>
-        <div className="sum__item">
-            <p className='sum__item-name'>Dziadek</p>
-            <p className='sum__item-amount'>50 zł</p>
-            <div className="sum__item-btns-row">
-                <button className='sum__item-btn'>+2</button>
-                <button className='sum__item-btn'>+5</button>
-            </div>
-        </div>
-        <div className="sum__item">
-            <p className='sum__item-name'>Wujek</p>
-            <p className='sum__item-amount'>50 zł</p>
-            <div className="sum__item-btns-row">
-                <button className='sum__item-btn'>+2</button>
-                <button className='sum__item-btn'>+5</button>
-            </div>
-        </div>
+        ))}
     </div>
   )
 }
