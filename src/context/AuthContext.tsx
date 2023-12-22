@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from "../config/firebase";
+import { useNotification } from './NotificationContext';
+import * as messages from "../constants/messages";
 
 type FirebaseUser = any;
 
@@ -19,14 +21,16 @@ export function useAuth(){
 
 export function AuthProvider({ children }: any) {
   const [user, setUser] = useState<FirebaseUser>(null);
+  const { showNotification, showErrorNotification } = useNotification()
 
   function logOut() {
     auth.signOut()
       .then(() => {
         setUser(null)
+        showNotification(messages.logOutSuccess)
       })
       .catch(error => {
-        console.log(error)
+        showErrorNotification(messages.logOutFail)
       })
   }
 
