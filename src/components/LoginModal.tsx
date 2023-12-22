@@ -26,6 +26,7 @@ interface LoginModalProps {
 function LoginModal({ loginModalActive, setLoginModalActive }: LoginModalProps) {
 	const [form, setForm] = useState<Form>({ email: "", password: "" });
     const [errors, setErrors] = useState<Partial<Errors>>({})
+    const [loading, setLoading] = useState<boolean>(false);
     const { showErrorNotification } = useNotification()
 
 	function handleChangeInput(e: ChangeEvent<HTMLInputElement>) {
@@ -39,11 +40,16 @@ function LoginModal({ loginModalActive, setLoginModalActive }: LoginModalProps) 
     }
 
     function handleLoginWithEmailAndPassword() {
+        setLoading(true);
+
         loginWithEmailAndPassword(form.email, form.password)
             .then(() => {
                 setLoginModalActive(false)
+                setLoading(false)
             })
             .catch(error => {
+                setLoading(false)
+
                 if (error.code === 'auth/invalid-credential') {
                     showErrorNotification(messages.loginCredentialsIncorrect)
                     return;
@@ -89,7 +95,7 @@ function LoginModal({ loginModalActive, setLoginModalActive }: LoginModalProps) 
                             fullWidth
                         />
                     </div>
-                    <button type="submit" className="login-modal__submit-btn">Zaloguj</button>
+                    <button type="submit" className="login-modal__submit-btn" disabled={loading}>Zaloguj</button>
                 </form>
             </div>
 		</>

@@ -9,6 +9,11 @@
     &:hover {
         background-color: $secondary-color-hover;
     }
+
+    &:disabled {
+        background-color: $secondary-color-disabled;
+        cursor: not-allowed;
+    }
 }
 
 @mixin button-circle {
