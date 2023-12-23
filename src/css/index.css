@@ -160,6 +160,7 @@
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 .sum__item-btn {
   padding: 8px 16px;
@@ -174,6 +175,24 @@
   background-color: #0a99a9;
 }
 .sum__item-btn:disabled {
+  background-color: #065760;
+  cursor: not-allowed;
+}
+.sum__item-btn-submit {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: #087E8B;
+  width: 100%;
+  margin-top: 20px;
+}
+.sum__item-btn-submit:hover {
+  background-color: #0a99a9;
+}
+.sum__item-btn-submit:disabled {
   background-color: #065760;
   cursor: not-allowed;
 }

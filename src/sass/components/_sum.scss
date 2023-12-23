@@ -37,10 +37,17 @@
         gap: 5px;
         justify-content: center;
         margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     &__item-btn {
         @include button-normal;
+    }
+
+    &__item-btn-submit {
+        @include button-normal;
+        width: 100%;
+        margin-top: 20px;
     }
 }
 
