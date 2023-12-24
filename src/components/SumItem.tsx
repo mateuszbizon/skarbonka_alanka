@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNotification } from '../context/NotificationContext'
+import { useAmountMoney } from '../context/AmountMoneyContext'
 import { updatePersonAmount } from '../services/update'
 import * as messages from "../constants/messages"
 import TextField from "@mui/material/TextField";
@@ -22,6 +23,7 @@ function SumItem({ person }: SumItemProps) {
     const [loading, setLoading] = useState<boolean>(false)
     const { user } = useAuth();
     const { showErrorNotification } = useNotification();
+    const { changeAmountMoney } = useAmountMoney()
 
     function handleUpdatePersonAmount(personId: string, personOldAmount: number, personNewAmount: number) {
         let newAmount = personOldAmount + personNewAmount
@@ -30,6 +32,7 @@ function SumItem({ person }: SumItemProps) {
         updatePersonAmount(personId, newAmount)
             .then(() => {
                 setUpdatedPerson({ ...updatedPerson, amount: newAmount })
+                changeAmountMoney(personId, personNewAmount)
                 setLoading(false)
             })
             .catch(error => {

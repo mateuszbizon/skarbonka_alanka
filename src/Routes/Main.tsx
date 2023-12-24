@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import * as mainViews from "../constants/mainViewStrings";
 import { getAllPeople } from '../services/getData';
 import { useNotification } from '../context/NotificationContext';
+import { useAmountMoney } from '../context/AmountMoneyContext';
 import * as messages from "../constants/messages";
 
 function Main() {
@@ -14,6 +15,7 @@ function Main() {
   const [loginModalActive, setLoginModalActive] = useState<boolean>(false);
   const [peopleList, setPeopleList] = useState<any[]>([])
   const { showErrorNotification } = useNotification();
+  const { amountMoney, getPeopleList } = useAmountMoney();
 
   function handleGetAllPeople() {
     getAllPeople()
@@ -21,6 +23,7 @@ function Main() {
         const filteredData = data.docs.map(doc => ({...doc.data(), id: doc.id}))
         console.log(filteredData)
         setPeopleList(filteredData)
+        getPeopleList(filteredData)
       })
       .catch(error => {
         showErrorNotification(messages.getAllPeopleFail)
@@ -37,7 +40,7 @@ function Main() {
       <LoginModal loginModalActive={loginModalActive} setLoginModalActive={setLoginModalActive} />
       <Container fixed>
         <Header setMainView={setMainView} />
-        <h2 className="main__amount">Suma pieniędzy: 200 zł</h2>
+        <h2 className="main__amount">Suma pieniędzy: {amountMoney} zł</h2>
         {mainView === mainViews.sumView && <Sum peopleList={peopleList} />}
       </Container>
     </div>
