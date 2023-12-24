@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNotification } from '../context/NotificationContext'
-import { useAmountMoney } from '../context/AmountMoneyContext'
 import { updatePersonAmount } from '../services/update'
 import * as messages from "../constants/messages"
 import TextField from "@mui/material/TextField";
@@ -17,22 +16,20 @@ interface AmountErrors {
 }
 
 function SumItem({ person }: SumItemProps) {
-    const [updatedPerson, setUpdatedPerson] = useState<any>(person)
+    const [amountDebt, setAmountDebt] = useState<number[]>(person.amountDebt)
     const [customAmountValue, setCustomAmountValue] = useState<string>("")
     const [errors, setErrors] = useState<Partial<AmountErrors>>({})
     const [loading, setLoading] = useState<boolean>(false)
     const { user } = useAuth();
-    const { showErrorNotification } = useNotification();
-    const { changeAmountMoney } = useAmountMoney()
+    const { showErrorNotification, showNotification } = useNotification();
 
-    function handleUpdatePersonAmount(personId: string, personOldAmount: number, personNewAmount: number) {
-        let newAmount = personOldAmount + personNewAmount
+    function handleUpdatePersonAmount(personId: string, personNewAmount: number) {
+        amountDebt.push(personNewAmount)
 
         setLoading(true)
-        updatePersonAmount(personId, newAmount)
+        updatePersonAmount(personId, amountDebt)
             .then(() => {
-                setUpdatedPerson({ ...updatedPerson, amount: newAmount })
-                changeAmountMoney(personId, personNewAmount)
+                showNotification(messages.addedAmountDebtSuccess)
                 setLoading(false)
             })
             .catch(error => {
@@ -47,30 +44,24 @@ function SumItem({ person }: SumItemProps) {
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        setErrors(amountValidation(updatedPerson.amount, customAmountValue))
+        setErrors(amountValidation(customAmountValue))
     }
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && customAmountValue.length > 0) {
-            handleUpdatePersonAmount(person.id, updatedPerson.amount, Number(customAmountValue))
+            handleUpdatePersonAmount(person.id, Number(customAmountValue))
         }
     }, [errors])
 
   return (
     <div className="sum__item">
         <p className='sum__item-name'>{person.name}</p>
-        <p className='sum__item-amount'>{updatedPerson.amount} zł</p>
+        <p className='sum__item-amount'>{person.amount} zł</p>
         {user && (
             <>
                 <div className="sum__item-btns-row">
-                    <button className='sum__item-btn' onClick={() => handleUpdatePersonAmount(person.id, updatedPerson.amount, 2)} disabled={loading}>+2</button>
-                    <button className='sum__item-btn' onClick={() => handleUpdatePersonAmount(person.id, updatedPerson.amount, 5)} disabled={loading}>+5</button>
-                    {updatedPerson.amount >= 2 && (
-                        <button className='sum__item-btn' onClick={() => handleUpdatePersonAmount(person.id, updatedPerson.amount, -2)} disabled={loading}>-2</button>                          
-                    )}
-                    {updatedPerson.amount >= 5 && (
-                        <button className='sum__item-btn' onClick={() => handleUpdatePersonAmount(person.id, updatedPerson.amount, -5)} disabled={loading}>-5</button>  
-                    )}
+                    <button className='sum__item-btn' onClick={() => handleUpdatePersonAmount(person.id, 2)} disabled={loading}>+2</button>
+                    <button className='sum__item-btn' onClick={() => handleUpdatePersonAmount(person.id, 5)} disabled={loading}>+5</button>      
                 </div>
                 <form onSubmit={handleSubmit} noValidate>
                     <TextField 
@@ -80,7 +71,7 @@ function SumItem({ person }: SumItemProps) {
                         helperText={errors.amount && errors.amountMessage} 
                         value={customAmountValue} onChange={handleInputChange} 
                         fullWidth />
-                    <button type='submit' className='sum__item-btn-submit' disabled={loading}>Zmień wartość</button>
+                    <button type='submit' className='sum__item-btn-submit' disabled={loading}>Dodaj wartość</button>
                 </form>
             </>
         )}

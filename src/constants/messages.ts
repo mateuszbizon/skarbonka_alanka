@@ -6,4 +6,5 @@ export const loginCredentialsIncorrect = "Błędne dane logowania"
 
 export const getAllPeopleFail = "Nie można pobrać danych"
 
+export const addedAmountDebtSuccess = "Dodano dług pomyślnie"
 export const updatePersonFail = "Nie można zaktualizować danych"

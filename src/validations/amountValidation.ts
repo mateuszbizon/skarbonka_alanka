@@ -3,7 +3,7 @@ interface AmountErrors {
     amountMessage: string
 }
 
-export default function amountValidation(oldAmount: number, newAmount: string) {
+export default function amountValidation(newAmount: string) {
     const errors: Partial<AmountErrors> = {}
     const newAmountNumber = Number(newAmount)
 
@@ -12,9 +12,9 @@ export default function amountValidation(oldAmount: number, newAmount: string) {
         errors.amountMessage = "Pole wymagane"
     }
 
-    if (oldAmount + newAmountNumber < 0) {
+    if (newAmountNumber <= 0) {
         errors.amount = true
-        errors.amountMessage = "Suma nie może być mniejsza niż 0"
+        errors.amountMessage = "Suma nie może być mniejsza lub równa 0"
     }
 
     return errors
