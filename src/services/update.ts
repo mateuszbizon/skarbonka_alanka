@@ -6,3 +6,9 @@ export async function updatePersonAmount(personId: string, newPersonAmountDebt: 
 
     await updateDoc(personDoc, { amountDebt: newPersonAmountDebt })
 }
+
+export async function updatePersonAmountAndPersonAmountMoney(personId: string, newPersonAmountDebt: number[], newPersonAmount: number) {
+    const personDoc = doc(db, "people", personId)
+
+    await updateDoc(personDoc, { amountDebt: newPersonAmountDebt, amount: newPersonAmount })
+}

@@ -5,6 +5,7 @@ import { updatePersonAmount } from '../services/update'
 import * as messages from "../constants/messages"
 import TextField from "@mui/material/TextField";
 import amountValidation from '../validations/amountValidation'
+import { useNavigate } from 'react-router-dom'
 
 interface SumItemProps {
     person: any,
@@ -22,6 +23,7 @@ function SumItem({ person }: SumItemProps) {
     const [loading, setLoading] = useState<boolean>(false)
     const { user } = useAuth();
     const { showErrorNotification, showNotification } = useNotification();
+    const navigate = useNavigate()
 
     function handleUpdatePersonAmount(personId: string, personNewAmount: number) {
         amountDebt.push(personNewAmount)
@@ -71,7 +73,8 @@ function SumItem({ person }: SumItemProps) {
                         helperText={errors.amount && errors.amountMessage} 
                         value={customAmountValue} onChange={handleInputChange} 
                         fullWidth />
-                    <button type='submit' className='sum__item-btn-submit' disabled={loading}>Dodaj wartość</button>
+                    <button type='submit' className='sum__item-btn-full-width' disabled={loading}>Dodaj wartość</button>
+                    <button className='sum__item-btn-full-width' onClick={() => navigate(`/person/${person.id}`)}>Przejdź do długów</button>
                 </form>
             </>
         )}

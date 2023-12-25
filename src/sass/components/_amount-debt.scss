@@ -1,0 +1,67 @@
+@use "../abstract/mixins" as *;
+
+.amount-debt {
+    padding: 30px 0;
+
+    &__title {
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    &__btns-row {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 50px;
+    }
+
+    &__btn {
+        @include button-normal;
+        font-size: 15px;
+    }
+
+    &__debts {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    &__debt {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__debt-text {
+        font-size: 18px;
+    }
+
+    &__message {
+        text-align: center;
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .amount-debt {
+        &__title {
+            font-size: 40px;
+        }
+
+        &__btn {
+            font-size: 18px;
+        }
+
+        &__debt {
+            gap: 20px;
+        }
+
+        &__debt-text {
+            font-size: 25px;
+        }
+    }
+}

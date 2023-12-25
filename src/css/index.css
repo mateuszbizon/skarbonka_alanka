@@ -2,6 +2,10 @@
   min-height: 100vh;
   position: relative;
 }
+.main__title {
+  font-size: 30px;
+  text-align: center;
+}
 .main__amount {
   text-align: center;
   margin-top: 30px;
@@ -9,6 +13,9 @@
 }
 
 @media (min-width: 768px) {
+  .main__title {
+    font-size: 40px;
+  }
   .main__amount {
     font-size: 30px;
   }
@@ -67,51 +74,6 @@
   }
   .nav__btn {
     display: block;
-  }
-}
-.header {
-  margin-top: 10px;
-}
-.header__title {
-  font-size: 30px;
-  text-align: center;
-}
-.header__btns-row {
-  margin-top: 15px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 15px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-.header__btn {
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-  color: #fff;
-  background-color: #087E8B;
-  font-size: 15px;
-}
-.header__btn:hover {
-  background-color: #0a99a9;
-}
-.header__btn:disabled {
-  background-color: #065760;
-  cursor: not-allowed;
-}
-
-@media (min-width: 768px) {
-  .header__title {
-    font-size: 40px;
-  }
-  .header__btn {
-    font-size: 18px;
   }
 }
 .sum {
@@ -178,7 +140,7 @@
   background-color: #065760;
   cursor: not-allowed;
 }
-.sum__item-btn-submit {
+.sum__item-btn-full-width {
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 18px;
@@ -189,10 +151,10 @@
   width: 100%;
   margin-top: 20px;
 }
-.sum__item-btn-submit:hover {
+.sum__item-btn-full-width:hover {
   background-color: #0a99a9;
 }
-.sum__item-btn-submit:disabled {
+.sum__item-btn-full-width:disabled {
   background-color: #065760;
   cursor: not-allowed;
 }
@@ -318,6 +280,87 @@
   top: 50px;
 }
 
+.amount-debt {
+  padding: 30px 0;
+}
+.amount-debt__title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.amount-debt__btns-row {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 50px;
+}
+.amount-debt__btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: #087E8B;
+  font-size: 15px;
+}
+.amount-debt__btn:hover {
+  background-color: #0a99a9;
+}
+.amount-debt__btn:disabled {
+  background-color: #065760;
+  cursor: not-allowed;
+}
+.amount-debt__debts {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 15px;
+}
+.amount-debt__debt {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.amount-debt__debt-text {
+  font-size: 18px;
+}
+.amount-debt__message {
+  text-align: center;
+  font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  .amount-debt__title {
+    font-size: 40px;
+  }
+  .amount-debt__btn {
+    font-size: 18px;
+  }
+  .amount-debt__debt {
+    gap: 20px;
+  }
+  .amount-debt__debt-text {
+    font-size: 25px;
+  }
+}
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

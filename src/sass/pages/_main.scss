@@ -2,6 +2,11 @@
     min-height: 100vh;
     position: relative;
 
+    &__title {
+        font-size: 30px;
+        text-align: center;
+    }
+
     &__amount {
         text-align: center;
         margin-top: 30px;
@@ -11,6 +16,10 @@
 
 @media (min-width: 768px) {
     .main {
+        &__title {
+            font-size: 40px;
+        }
+
         &__amount {
             font-size: 30px;
         }
