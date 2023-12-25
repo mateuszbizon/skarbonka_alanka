@@ -5,7 +5,7 @@ import * as messages from "../constants/messages";
 import { useNotification } from '../context/NotificationContext';
 import { useNavigate } from 'react-router-dom';
 import Container from '@mui/material/Container';
-import { updatePersonAmount, updatePersonAmountAndPersonAmountMoney } from '../services/update';
+import { updatePersonAmountDebt, updatePersonAmountDebtAndPersonAmountMoney } from '../services/update';
 
 function AmountDebt() {
     const [person, setPerson] = useState<any>({})
@@ -35,11 +35,11 @@ function AmountDebt() {
         return updatedPersonAmountDebt
     }
 
-    function handleUpdatePersonAmount(index: number) {
+    function handleUpdatePersonAmountDebt(index: number) {
         const updatedPersonAmountDebt = handleDeleteDebt(index)
 
         setLoading(true)
-        updatePersonAmount(person.id, updatedPersonAmountDebt)
+        updatePersonAmountDebt(person.id, updatedPersonAmountDebt)
             .then(() => {
                 setPerson({ ...person, amountDebt: updatedPersonAmountDebt })
                 showNotification(messages.deletedDebtSuccess)
@@ -52,12 +52,9 @@ function AmountDebt() {
             })
     }
 
-    function handleUpdatePersonAmountAndPersonAmountMoney(index: number) {
-        const newPersonAmount = person.amount + person.amountDebt[index]
-        const updatedPersonAmountDebt = handleDeleteDebt(index)
-
+    function handleUpdatePersonAmountDebtAndPersonAmountMoney(updatedPersonAmountDebt: any[], newPersonAmount: number) {
         setLoading(true)
-        updatePersonAmountAndPersonAmountMoney(person.id, updatedPersonAmountDebt, newPersonAmount)
+        updatePersonAmountDebtAndPersonAmountMoney(person.id, updatedPersonAmountDebt, newPersonAmount)
             .then(() => {
                 setPerson({ ...person, amount: newPersonAmount, amountDebt: updatedPersonAmountDebt })
                 showNotification(messages.addedAmountDebtToAmountMoneySuccess)
@@ -70,6 +67,26 @@ function AmountDebt() {
             })
     }
 
+    function addOneAmount(index: number) {
+        const newPersonAmount = person.amount + person.amountDebt[index]
+        const updatedPersonAmountDebt = handleDeleteDebt(index)
+
+        handleUpdatePersonAmountDebtAndPersonAmountMoney(updatedPersonAmountDebt, newPersonAmount)
+    }
+
+    function addWholeAmount() {
+        let newWholePersonAmount = 0
+
+        person.amountDebt.forEach((debt: number) => {
+            newWholePersonAmount+= debt
+        })
+
+        const newPersonAmount = person.amount + newWholePersonAmount
+        const updatedPersonAmountDebt: any[] = []
+
+        handleUpdatePersonAmountDebtAndPersonAmountMoney(updatedPersonAmountDebt, newPersonAmount)
+    }
+
     useEffect(() => {
         handleGetPerson()
     }, [])
@@ -80,6 +97,7 @@ function AmountDebt() {
             <h1 className="amount-debt__title">Długi dla {person?.name}</h1>
             <div className="amount-debt__btns-row">
                 <button className='amount-debt__btn' onClick={() => navigate("/")}>Wróć do sumy pieniędzy</button>
+                <button className="amount-debt__btn" onClick={addWholeAmount}>Dodaj wszystko</button>
             </div>
             <div className="amount-debt__debts">
                 {!person?.amountDebt?.length ? (
@@ -93,13 +111,13 @@ function AmountDebt() {
                                 <span className='amount-debt__debt-text'>+{debt} zł</span>
                                 <button 
                                     className="amount-debt__btn" 
-                                    onClick={() => handleUpdatePersonAmountAndPersonAmountMoney(index)}
+                                    onClick={() => addOneAmount(index)}
                                     disabled={loading}>
                                 Dodaj do sumy
                                 </button>
                                 <button 
                                     className="amount-debt__btn" 
-                                    onClick={() => handleUpdatePersonAmount(index)}
+                                    onClick={() => handleUpdatePersonAmountDebt(index)}
                                     disabled={loading}>
                                 Usuń
                                 </button>

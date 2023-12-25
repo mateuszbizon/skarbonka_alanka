@@ -296,6 +296,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  gap: 15px;
   margin-bottom: 50px;
 }
 .amount-debt__btn {

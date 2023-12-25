@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNotification } from '../context/NotificationContext'
-import { updatePersonAmount } from '../services/update'
+import { updatePersonAmountDebt } from '../services/update'
 import * as messages from "../constants/messages"
 import TextField from "@mui/material/TextField";
 import amountValidation from '../validations/amountValidation'
@@ -25,11 +25,11 @@ function SumItem({ person }: SumItemProps) {
     const { showErrorNotification, showNotification } = useNotification();
     const navigate = useNavigate()
 
-    function handleUpdatePersonAmount(personId: string, personNewAmount: number) {
+    function handleUpdatePersonAmountDebt(personId: string, personNewAmount: number) {
         amountDebt.push(personNewAmount)
 
         setLoading(true)
-        updatePersonAmount(personId, amountDebt)
+        updatePersonAmountDebt(personId, amountDebt)
             .then(() => {
                 showNotification(messages.addedAmountDebtSuccess)
                 setLoading(false)
@@ -51,7 +51,7 @@ function SumItem({ person }: SumItemProps) {
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && customAmountValue.length > 0) {
-            handleUpdatePersonAmount(person.id, Number(customAmountValue))
+            handleUpdatePersonAmountDebt(person.id, Number(customAmountValue))
         }
     }, [errors])
 
@@ -62,8 +62,8 @@ function SumItem({ person }: SumItemProps) {
         {user && (
             <>
                 <div className="sum__item-btns-row">
-                    <button className='sum__item-btn' onClick={() => handleUpdatePersonAmount(person.id, 2)} disabled={loading}>+2</button>
-                    <button className='sum__item-btn' onClick={() => handleUpdatePersonAmount(person.id, 5)} disabled={loading}>+5</button>      
+                    <button className='sum__item-btn' onClick={() => handleUpdatePersonAmountDebt(person.id, 2)} disabled={loading}>+2</button>
+                    <button className='sum__item-btn' onClick={() => handleUpdatePersonAmountDebt(person.id, 5)} disabled={loading}>+5</button>      
                 </div>
                 <form onSubmit={handleSubmit} noValidate>
                     <TextField 
