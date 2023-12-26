@@ -32,6 +32,7 @@ function SumItem({ person }: SumItemProps) {
         updatePersonAmountDebt(personId, amountDebt)
             .then(() => {
                 showNotification(messages.addedAmountDebtSuccess)
+                setCustomAmountValue("")
                 setLoading(false)
             })
             .catch(error => {

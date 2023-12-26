@@ -28,16 +28,14 @@ function AmountDebt() {
         }
     }
 
-    function handleDeleteDebt(index: number) {
+    function getUpdatedPersonAmountDebt(index: number) {
         const updatedPersonAmountDebt = [...person.amountDebt]
         updatedPersonAmountDebt.splice(index, 1);
 
         return updatedPersonAmountDebt
     }
 
-    function handleUpdatePersonAmountDebt(index: number) {
-        const updatedPersonAmountDebt = handleDeleteDebt(index)
-
+    function handleUpdatePersonAmountDebt(updatedPersonAmountDebt: any[]) {
         setLoading(true)
         updatePersonAmountDebt(person.id, updatedPersonAmountDebt)
             .then(() => {
@@ -67,9 +65,15 @@ function AmountDebt() {
             })
     }
 
+    function deleteDebt(index: number) {
+        const updatedPersonAmountDebt = getUpdatedPersonAmountDebt(index)
+
+        handleUpdatePersonAmountDebt(updatedPersonAmountDebt)
+    }
+
     function addOneAmount(index: number) {
         const newPersonAmount = person.amount + person.amountDebt[index]
-        const updatedPersonAmountDebt = handleDeleteDebt(index)
+        const updatedPersonAmountDebt = getUpdatedPersonAmountDebt(index)
 
         handleUpdatePersonAmountDebtAndPersonAmountMoney(updatedPersonAmountDebt, newPersonAmount)
     }
@@ -117,7 +121,7 @@ function AmountDebt() {
                                 </button>
                                 <button 
                                     className="amount-debt__btn" 
-                                    onClick={() => handleUpdatePersonAmountDebt(index)}
+                                    onClick={() => deleteDebt(index)}
                                     disabled={loading}>
                                 Usuń
                                 </button>
