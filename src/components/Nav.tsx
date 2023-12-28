@@ -3,13 +3,18 @@ import { useAuth } from '../context/AuthContext';
 
 interface NavProps {
   setLoginModalActive: (loginModalActive: boolean) => void
+  setNewPersonModalActive: (newPersonModalActive: boolean) => void
 }
 
-function Nav({ setLoginModalActive }: NavProps) {
+function Nav({ setLoginModalActive, setNewPersonModalActive }: NavProps) {
   const { user, logOut } = useAuth();
 
   function handleSetLoginModal() {
     setLoginModalActive(true);
+  }
+
+  function handleSetNewPersonModal() {
+    setNewPersonModalActive(true)
   }
 
   function handleLogOut() {
@@ -34,6 +39,16 @@ function Nav({ setLoginModalActive }: NavProps) {
             </button>
             <button className='nav__btn' onClick={handleSetLoginModal}>
                 Zaloguj się
+            </button>
+          </>
+        )}
+        {user && (
+          <>
+            <button className='nav__btn-circle' onClick={handleSetNewPersonModal}>
+              <i className="fa-solid fa-plus" aria-label='dodaj nową osobę'></i>
+            </button>
+            <button className='nav__btn' onClick={handleSetNewPersonModal}>
+                Dodaj nową osobę
             </button>
           </>
         )}

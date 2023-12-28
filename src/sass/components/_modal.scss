@@ -1,13 +1,13 @@
 @use "../abstract/colors" as *;
 @use "../abstract/mixins" as *;
 
-.login-modal {
+.modal {
     position: absolute;
     top: -100%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 300px;
-    min-height: 300px;
+    min-height: 200px;
     background-color: #fff;
     border-radius: 8px;
     z-index: 50;
@@ -31,12 +31,12 @@
     }
 }
 
-.login-modal-show {
+.modal-show {
     top: 200px;
 }
 
 @media (min-width: 768px) {
-    .login-modal {
+    .modal {
         width: 400px;
 
         &__title {

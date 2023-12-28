@@ -11,3 +11,6 @@ export const addedAmountDebtSuccess = "Dodano dług pomyślnie"
 export const addedAmountDebtToAmountMoneySuccess = "Dodano dług do sumy pomyślnie"
 export const deletedDebtSuccess = "Usunięto dług pomyślnie"
 export const updatePersonFail = "Nie można zaktualizować danych"
+
+export const addedNewPersonSuccess = "Dodano nową osobę pomyślnie";
+export const addedNewPersonFail = "Nie można dodać osoby";

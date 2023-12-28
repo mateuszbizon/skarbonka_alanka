@@ -68,10 +68,10 @@ function LoginModal({ loginModalActive, setLoginModalActive }: LoginModalProps) 
 	return (
 		<>
 			<Shadow modalActive={loginModalActive} setModalActive={setLoginModalActive} />
-            <div className={loginModalActive ? "login-modal login-modal-show" : "login-modal"}>
-                <h3 className='login-modal__title'>Zaloguj</h3>
+            <div className={loginModalActive ? "modal modal-show" : "modal"}>
+                <h3 className='modal__title'>Zaloguj</h3>
                 <form onSubmit={handleSubmit}>
-                    <div className='login-modal__box'>
+                    <div className='modal__box'>
                         <TextField
                             type='text'
                             name='email'
@@ -83,7 +83,7 @@ function LoginModal({ loginModalActive, setLoginModalActive }: LoginModalProps) 
                             fullWidth
                         />
                     </div>
-                    <div className='login-modal__box'>
+                    <div className='modal__box'>
                         <TextField
                             type='password'
                             name='password'
@@ -95,7 +95,7 @@ function LoginModal({ loginModalActive, setLoginModalActive }: LoginModalProps) 
                             fullWidth
                         />
                     </div>
-                    <button type="submit" className="login-modal__submit-btn" disabled={loading}>Zaloguj</button>
+                    <button type="submit" className="modal__submit-btn" disabled={loading}>Zaloguj</button>
                 </form>
             </div>
 		</>
